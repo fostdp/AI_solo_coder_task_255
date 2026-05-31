@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数学公式速算挑战</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧮 数学公式速算挑战</h1>
+            <p>挑战你的数学思维极限！</p>
+        </header>
+
+        <div class="mode-selector">
+            <button class="mode-btn active" data-mode="arithmetic">⚡ 速算模式</button>
+            <button class="mode-btn" data-mode="equation">📐 方程求解</button>
+            <button class="mode-btn" data-mode="inequality">⚖️ 不等式判断</button>
+        </div>
+
+        <div class="game-stats">
+            <div class="stat">
+                <span class="label">得分</span>
+                <span id="score" class="value">0</span>
+            </div>
+            <div class="stat">
+                <span class="label">难度</span>
+                <span id="level" class="value">1</span>
+            </div>
+            <div class="stat">
+                <span class="label">正确</span>
+                <span id="correct" class="value">0</span>
+            </div>
+            <div class="stat">
+                <span class="label">错误</span>
+                <span id="wrong" class="value">0</span>
+            </div>
+        </div>
+
+        <div class="timer-container">
+            <div id="timer-bar" class="timer-bar"></div>
+        </div>
+
+        <div class="game-area">
+            <div id="question" class="question">选择模式开始游戏</div>
+            <div class="answer-area">
+                <input type="number" id="answer-input" placeholder="输入答案" step="any">
+                <div id="inequality-buttons" class="inequality-buttons hidden">
+                    <button class="inequality-btn" data-value="true">✅ 成立</button>
+                    <button class="inequality-btn" data-value="false">❌ 不成立</button>
+                </div>
+                <button id="submit-btn">提交</button>
+            </div>
+            <div id="feedback" class="feedback"></div>
+        </div>
+
+        <div class="controls">
+            <button id="start-btn" class="btn btn-primary">开始游戏</button>
+            <button id="leaderboard-btn" class="btn btn-secondary">🏆 排行榜</button>
+            <button id="battle-btn" class="btn btn-battle">⚔️ 好友对战</button>
+            <button id="history-btn" class="btn btn-secondary">📊 历史记录</button>
+        </div>
+
+        <div id="history-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>📊 历史记录</h2>
+                <div id="history-content"></div>
+            </div>
+        </div>
+
+        <div id="game-over-modal" class="modal">
+            <div class="modal-content">
+                <h2>🎉 游戏结束</h2>
+                <div id="game-over-stats"></div>
+                <div class="player-name-input">
+                    <input type="text" id="player-name" placeholder="输入你的昵称（用于排行榜）" maxlength="10">
+                </div>
+                <button id="save-score-btn" class="btn btn-primary">保存成绩</button>
+                <button id="restart-btn" class="btn btn-secondary">再来一局</button>
+            </div>
+        </div>
+
+        <div id="leaderboard-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>🏆 排行榜</h2>
+                <div class="leaderboard-tabs">
+                    <button class="tab-btn active" data-tab="arithmetic">速算模式</button>
+                    <button class="tab-btn" data-tab="equation">方程模式</button>
+                    <button class="tab-btn" data-tab="inequality">不等式模式</button>
+                    <button class="tab-btn" data-tab="total">总积分</button>
+                </div>
+                <div id="leaderboard-content"></div>
+            </div>
+        </div>
+
+        <div id="battle-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>⚔️ 好友对战</h2>
+                <div id="battle-lobby">
+                    <div class="battle-create">
+                        <h3>创建房间</h3>
+                        <input type="text" id="room-name" placeholder="房间名称" maxlength="20">
+                        <input type="text" id="player1-name" placeholder="你的昵称" maxlength="10">
+                        <button id="create-room-btn" class="btn btn-primary">创建房间</button>
+                    </div>
+                    <div class="battle-join">
+                        <h3>加入房间</h3>
+                        <div id="room-list"></div>
+                        <input type="text" id="player2-name" placeholder="你的昵称" maxlength="10">
+                        <button id="join-room-btn" class="btn btn-secondary">加入房间</button>
+                    </div>
+                </div>
+                <div id="battle-room" class="hidden">
+                    <div class="battle-players">
+                        <div class="player-card" id="player1-card">
+                            <div class="player-name">玩家1</div>
+                            <div class="player-score">0</div>
+                        </div>
+                        <div class="vs">VS</div>
+                        <div class="player-card" id="player2-card">
+                            <div class="player-name">玩家2</div>
+                            <div class="player-score">0</div>
+                        </div>
+                    </div>
+                    <div class="battle-question" id="battle-question">等待游戏开始...</div>
+                    <div class="battle-answer" id="battle-answer-area">
+                        <input type="number" id="battle-answer-input" placeholder="输入答案" step="any">
+                        <button id="battle-submit-btn">提交</button>
+                    </div>
+                    <div id="battle-feedback"></div>
+                    <div class="battle-timer" id="battle-timer">30</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="test.js"></script>
+</body>
+</html>
